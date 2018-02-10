@@ -46,3 +46,6 @@ body {
     vertical-align: middle !important; 
 }
 
+.m-pointer {
+    cursor: pointer;
+}
