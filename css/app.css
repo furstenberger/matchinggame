@@ -1,0 +1,48 @@
+/* ----------------- Stylesheet for Matching Game ----------------- */
+
+/* Document
+   ========================================================================== */
+/**
+
+/* 
+   * Created by Alexandre Furstenberger 
+   * Date: February 2nd 2018
+   * Project: developed as a project for Udacity's Front End Web Developer Nanodegree */
+
+/* Sections
+   ========================================================================== */
+
+/**
+
+/* Change App Font */
+body { 
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.deck {
+    background: linear-gradient(to bottom right, rgb(43, 235, 193), plum );
+    -webkit-box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.75);
+
+}
+
+.card {
+    height: 6em;
+    width: 6em;
+    background-color: darkslategray;
+}
+
+.container {
+    max-width: 600px;
+}
+
+.row-margin {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.panel-heading { 
+    vertical-align: middle !important; 
+}
+
