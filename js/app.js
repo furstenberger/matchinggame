@@ -30,7 +30,7 @@ let gridCardsArray = [];
 $(function () {
 
     gridCardsArray = createGrid();
-    console.log(gridCardsArray);
+    addIdToCards();
 
 });
 
@@ -61,5 +61,19 @@ function createGrid() {
     }
 
     return cardsArray;
+
+}
+
+// manipulate DOM to add the attribute ID with value equal to all cards
+function addIdToCards() {
+
+    let cards = $('.card').each(function(index){
+        
+        $(this).attr('id', gridCardsArray[index].getCardID());
+        console.log(index + ": " + gridCardsArray[index].getCardID());
+
+
+    });
+    
 
 }
