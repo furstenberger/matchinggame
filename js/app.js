@@ -30,7 +30,7 @@ let gridCardsArray = [];
 $(function () {
 
     gridCardsArray = createGrid();
-    addIdToCards();
+    initCards();
 
 });
 
@@ -60,20 +60,29 @@ function createGrid() {
 
     }
 
+    // shuffle array after creation
+
+    cardsArray = cardsArray.sort(() => .5 - Math.random()); // shuffle 
+
     return cardsArray;
 
 }
 
 // manipulate DOM to add the attribute ID with value equal to all cards
-function addIdToCards() {
+function initCards() {
 
+    //iterates over all card DOM elements
     let cards = $('.card').each(function(index){
         
+        // set DOM element ID attribute with object ID property
         $(this).attr('id', gridCardsArray[index].getCardID());
-        console.log(index + ": " + gridCardsArray[index].getCardID());
 
+        // apppend child for card Icon as per materialize library and add classes
+        let cardIcon = $('<i>').text(gridCardsArray[index].getCardIcon());
+        cardIcon.toggleClass('material-icons panel-heading');
+        // append child element to cards
+        $(this).append(cardIcon);
 
     });
     
-
 }

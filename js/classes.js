@@ -14,7 +14,7 @@
 //  Define superclass for grid cards
 let gridCard = function (icon, id){
 
-    this.cardText = icon;               // assign which icon object will show once faced up
+    this.cardIcon = icon;               // assign which icon object will show once faced up
     this.cardID = id;                   // identify object 
     this.cardColor = 'darkslategray';   // define default card color faced down
     this.isFacedDown = true;            // define default card status: all faced down when game starts
@@ -25,7 +25,7 @@ let gridCard = function (icon, id){
 
 // get access to card icon value
 gridCard.prototype.getCardIcon = function(){
-    return this.cardIcons;    
+    return this.cardIcon;    
 }
 
 // get card ID
@@ -47,7 +47,7 @@ gridCard.prototype.getCardStatus = function () {
 
 // change card color
 gridCard.prototype.setCardText = function (icon) {
-    this.cardText = icon;
+    this.cardIcon = icon;
 }
 
 // change card color
