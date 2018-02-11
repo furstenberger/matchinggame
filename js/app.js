@@ -29,8 +29,14 @@ let gridCardsArray = [];
 
 $(function () {
 
-    gridCardsArray = createGrid();
+    // create the grid array
+    gridCardsArray = createGrid(); 
+
+    // start cards with objects IDs and Icon values
     initCards();
+
+    // add event listener for card click
+    $('.card').click(clickCard);
 
 });
 
@@ -77,12 +83,31 @@ function initCards() {
         // set DOM element ID attribute with object ID property
         $(this).attr('id', gridCardsArray[index].getCardID());
 
-        // apppend child for card Icon as per materialize library and add classes
-        let cardIcon = $('<i>').text(gridCardsArray[index].getCardIcon());
-        cardIcon.toggleClass('material-icons panel-heading');
+        // create child for card Icon as per materialize library and add classes
+        let cardIcon = $('<i>').toggleClass('material-icons panel-heading');
         // append child element to cards
         $(this).append(cardIcon);
 
     });
     
+}
+
+function clickCard() {
+
+    //get card ID from the DOM element
+    cardID = parseInt($(this).attr('id'),10);
+
+    // find index if grid cards array matching the card ID
+    let indexOfArray = gridCardsArray.findIndex(i => i.getCardID() === cardID);
+    let iconText = gridCardsArray[indexOfArray].getCardIcon();
+
+    // show card value
+    $(this).find('i').text(iconText);
+
+    // set the object facedown status: true for facedown - false for faceup
+    gridCardsArray[indexOfArray].setCardStatus(false);
+    
+    // interesting
+    //$(this).find('i').text( $(this).find('i').text() ? '' : iconText);
+
 }
