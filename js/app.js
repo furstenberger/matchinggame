@@ -106,63 +106,65 @@ function clickCard() {
         //get card icon to show when clicked
         const iconText = gridCardsArray[indexCurrentCard].getCardIcon();
 
-        // show card value
-        $(this).find('i').text(iconText);
-
-        // set background color for face up pattern
-        $(this).toggleClass('faceup');
+        // set background color and flip the card
+        $(this).toggleClass('flip faceup').find('i').text(iconText);
 
         // search in the cards object array for another clicked card
         const indexClickedPair = gridCardsArray.findIndex(i => i.cardClicked() === true);
 
-        // call function to compare values
-        compareIcons(indexCurrentCard, indexClickedPair)
-    
+       // call function to compare values - wait 1 second for player to see cards
+        if (indexClickedPair === -1) {
+
+            // if it is the first card of the pair clicked then set clicked status to true and move on
+            gridCardsArray[indexCurrentCard].setClickedStatus(true);
+        }
+        else {
+
+            // if there is a non matched and clicked card program will compare icon values
+            // wait 1 sec for player to see card
+            setTimeout(function(){
+                
+                compareIcons(indexCurrentCard, indexClickedPair);
+
+            }, 1000);
+        }
+
     }
 
 }
 
-
 function compareIcons(iCurrent, iPair) {
+    
+    // if it is the second card of the pair clicked reset the clicked status and move for comparison
+    gridCardsArray[iCurrent].setClickedStatus(false);
+    gridCardsArray[iPair].setClickedStatus(false);
 
-    // if there is a non matched and clicked card program will compare icon values
-    if (iPair === -1) {
+    // compare if icons are the same
+    if (gridCardsArray[iCurrent].getCardIcon() === gridCardsArray[iPair].getCardIcon()) {
 
-        // if it is the first card of the pair clicked then set clicked status to true and move on
-        gridCardsArray[iCurrent].setClickedStatus(true);
+        // if icons equal then set matched status to true
+        gridCardsArray[iCurrent].setMatchedStatus(true);
+        gridCardsArray[iPair].setMatchedStatus(true);
+
+        //play some animation here
 
     } else {
 
-        // if it is the second card of the pair clicked reset the clicked status and move for comparison
-        gridCardsArray[iCurrent].setClickedStatus(false);
-        gridCardsArray[iPair].setClickedStatus(false);
+        // get current clicked card id for DOM manuipulation
+        const currentID = gridCardsArray[iCurrent].getCardID();
 
-        // compare if icons are the same
-        if (gridCardsArray[iCurrent].getCardIcon() === gridCardsArray[iPair].getCardIcon()) {
+        // if icons different then set background color for face down pattern and hide icons
+        $('#' + currentID).find('i').text('');     // erase text so player cannot access values via dev tools from clicked element
+        $('#' + currentID).toggleClass('flip faceup');  // disable faceup class from clicked element
+        
 
-            // if icons equal then set matched status to true
-            gridCardsArray[iCurrent].setMatchedStatus(true);
-            gridCardsArray[iPair].setMatchedStatus(true);
+        // get previously clicked card id for DOM manuipulation
+        const pairID = gridCardsArray[iPair].getCardID();
 
-            //play some animation here
+        // set background color for face down pattern and hide icons
+        $('#' + pairID).find('i').text('');    // erase text so player cannot access values via dev tools from previously clicked element
+        $('#' + pairID).toggleClass('flip faceup'); // disable faceup class from previously clicked element
 
-        } else {
-
-            // get current clicked card id for DOM manuipulation
-            const currentID = gridCardsArray[iCurrent].getCardID();
-
-            // if icons different then set background color for face down pattern and hide icons
-            $('#' + currentID).toggleClass('faceup');  // disable faceup class from clicked element
-            $('#' + currentID).find('i').text('');     // erase text so player cannot access values via dev tools from clicked element
-
-            // get previously clicked card id for DOM manuipulation
-            const pairID = gridCardsArray[iPair].getCardID();
-
-            // set background color for face down pattern and hide icons
-            $('#' + pairID).toggleClass('faceup'); // disable faceup class from previously clicked element
-            $('#' + pairID).find('i').text('');    // erase text so player cannot access values via dev tools from previously clicked element
-
-        }
 
     }
 

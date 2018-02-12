@@ -53,3 +53,17 @@ body {
 .faceup {
     background-color:  mediumturquoise;
 }
+
+/* flip speed goes here */
+.flipper {
+
+	transition: 0.6s;
+	transform-style: preserve-3d;
+    position: relative;
+    
+}
+
+/* flip the pane when hovered */
+.flip {
+    transform: rotateY(180deg);
+}
