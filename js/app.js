@@ -92,6 +92,12 @@ function initCards() {
     
 }
 
+function waveEffect(){
+
+    $(this).toggleClass('waves-effect waves-light');
+
+}
+
 function clickCard() {
 
     //get card ID from the DOM element
@@ -149,21 +155,38 @@ function compareIcons(iCurrent, iPair) {
         //play some animation here
 
     } else {
-
+       
         // get current clicked card id for DOM manuipulation
         const currentID = gridCardsArray[iCurrent].getCardID();
+        // get previously clicked card id for DOM manuipulation
+        const pairID = gridCardsArray[iPair].getCardID();
+        
+        //$('#' + currentID).animate({ right: "5px" }, 200);
+        //$('#' + currentID).animate({ right: "0px"}, 200);
+
+        const animateTime = 200;
+
+
+        $('#' + currentID).stop(true, true).animate({ left: 30, backgroundColor: 'red' }, animateTime,
+            function () {
+                $('#' + currentID).stop(true, true).animate({ left: 0 }, animateTime);
+            });
+        
+        $('#' + pairID).stop(true, true).animate({ left: 30, backgroundColor: 'red' }, animateTime,
+            function () {
+                $('#' + pairID).stop(true, true).animate({ left: 0 }, animateTime);
+            });
 
         // if icons different then set background color for face down pattern and hide icons
         $('#' + currentID).find('i').text('');     // erase text so player cannot access values via dev tools from clicked element
-        $('#' + currentID).toggleClass('flip faceup');  // disable faceup class from clicked element
+        //$('#' + currentID).toggleClass('flip faceup');  // disable faceup class from clicked element
         
 
-        // get previously clicked card id for DOM manuipulation
-        const pairID = gridCardsArray[iPair].getCardID();
+        
 
         // set background color for face down pattern and hide icons
         $('#' + pairID).find('i').text('');    // erase text so player cannot access values via dev tools from previously clicked element
-        $('#' + pairID).toggleClass('flip faceup'); // disable faceup class from previously clicked element
+        //$('#' + pairID).toggleClass('flip faceup'); // disable faceup class from previously clicked element
 
 
     }
