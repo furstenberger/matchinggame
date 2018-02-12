@@ -98,19 +98,56 @@ function clickCard() {
     cardID = parseInt($(this).attr('id'),10);
 
     // find index if grid cards array matching the card ID
-    let indexOfArray = gridCardsArray.findIndex(i => i.getCardID() === cardID);
-    let iconText = gridCardsArray[indexOfArray].getCardIcon();
-
-    // show card value
-    $(this).find('i').text(iconText);
-
-    // set background color for face up pattern
-    $(this).toggleClass('faceup');
-
-    // set the object facedown status: true for face down - false for face up
-    gridCardsArray[indexOfArray].setCardStatus(false);
+    let indexOfCard = gridCardsArray.findIndex(i => i.getCardID() === cardID);
     
-    // interesting
-    //$(this).find('i').text( $(this).find('i').text() ? '' : iconText);
+    // execute this code if the clicked card is not matched yet
+    if (!gridCardsArray[indexOfCard].cardMatched()) {
+
+        let iconText = gridCardsArray[indexOfCard].getCardIcon();
+
+        // show card value
+        $(this).find('i').text(iconText);
+
+        // set background color for face up pattern
+        $(this).toggleClass('faceup');
+
+        // search in the cards object array for another clicked card
+        let indexClicked = gridCardsArray.findIndex(i => i.cardClicked() === true);
+
+        if (indexClicked === -1) {
+            
+            // set the current clicked object clicked status to true and move on
+            gridCardsArray[indexOfCard].setClickedStatus(true);
+
+        } else {
+
+                gridCardsArray[indexOfCard].setClickedStatus(false);
+                gridCardsArray[indexClicked].setClickedStatus(false);
+
+            if (gridCardsArray[indexOfCard].getCardIcon() === gridCardsArray[indexClicked].getCardIcon()) {
+
+                gridCardsArray[indexOfCard].setMatchedStatus(true);
+                gridCardsArray[indexClicked].setMatchedStatus(true);
+
+                //play some animation here
+
+            } else {
+
+                // set background color for face down pattern
+                $(this).toggleClass('faceup');
+                $(this).find('i').text('');
+
+                let pairID = gridCardsArray[indexClicked].getCardID();
+
+                $('#'+pairID).toggleClass('faceup');
+                $('#' + pairID).find('i').text('');
+
+            }
+
+        }
+    
+    }
 
 }
+
+

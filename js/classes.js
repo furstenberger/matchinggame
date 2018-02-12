@@ -17,7 +17,8 @@ let gridCard = function (icon, id){
     this.cardIcon = icon;               // assign which icon object will show once faced up
     this.cardID = id;                   // identify object 
     this.cardColor = 'darkslategray';   // define default card color faced down
-    this.isFacedDown = true;            // define default card status: all faced down when game starts
+    this.isClicked = false;              // define card status if clicked
+    this.isMatched = false;             // define card status if matched
 
 }
 
@@ -38,14 +39,19 @@ gridCard.prototype.getCardColor = function () {
     return this.cardColor;
 }
 
-// get card color
-gridCard.prototype.getCardStatus = function () {
-    return this.isFacedDown;
+// get card clicked status
+gridCard.prototype.cardClicked = function () {
+    return this.isClicked;
+}
+
+// get card mathed status
+gridCard.prototype.cardMatched = function () {
+    return this.isMatched;
 }
 
 /* --------------- write functions -------------- */
 
-// change card color
+// change card icon text
 gridCard.prototype.setCardText = function (icon) {
     this.cardIcon = icon;
 }
@@ -55,9 +61,13 @@ gridCard.prototype.setCardColor = function (color) {
     this.cardColor = color;
 }
 
-// change card color
-gridCard.prototype.setCardStatus = function(status){
-    this.isFacedDown = status;
+// change card clicked status
+gridCard.prototype.setClickedStatus = function(status){
+    this.isClicked = status;
 }
 
+// change card matched status
+gridCard.prototype.setMatchedStatus = function (status) {
+    this.isMatched = status;
+}
 
