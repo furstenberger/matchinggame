@@ -104,7 +104,10 @@ function clickCard() {
     // show card value
     $(this).find('i').text(iconText);
 
-    // set the object facedown status: true for facedown - false for faceup
+    // set background color for face up pattern
+    $(this).toggleClass('faceup');
+
+    // set the object facedown status: true for face down - false for face up
     gridCardsArray[indexOfArray].setCardStatus(false);
     
     // interesting

@@ -49,3 +49,7 @@ body {
 .m-pointer {
     cursor: pointer;
 }
+
+.faceup {
+    background-color:  mediumturquoise;
+}
