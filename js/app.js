@@ -95,15 +95,16 @@ function initCards() {
 function clickCard() {
 
     //get card ID from the DOM element
-    cardID = parseInt($(this).attr('id'),10);
+    const cardID = parseInt($(this).attr('id'),10);
 
     // find index if grid cards array matching the card ID
-    let indexOfCard = gridCardsArray.findIndex(i => i.getCardID() === cardID);
+    const indexCurrentCard = gridCardsArray.findIndex(i => i.getCardID() === cardID);
     
     // execute this code if the clicked card is not matched yet
-    if (!gridCardsArray[indexOfCard].cardMatched()) {
+    if (!gridCardsArray[indexCurrentCard].cardMatched()) {
 
-        let iconText = gridCardsArray[indexOfCard].getCardIcon();
+        //get card icon to show when clicked
+        const iconText = gridCardsArray[indexCurrentCard].getCardIcon();
 
         // show card value
         $(this).find('i').text(iconText);
@@ -112,42 +113,58 @@ function clickCard() {
         $(this).toggleClass('faceup');
 
         // search in the cards object array for another clicked card
-        let indexClicked = gridCardsArray.findIndex(i => i.cardClicked() === true);
+        const indexClickedPair = gridCardsArray.findIndex(i => i.cardClicked() === true);
 
-        if (indexClicked === -1) {
-            
-            // set the current clicked object clicked status to true and move on
-            gridCardsArray[indexOfCard].setClickedStatus(true);
-
-        } else {
-
-                gridCardsArray[indexOfCard].setClickedStatus(false);
-                gridCardsArray[indexClicked].setClickedStatus(false);
-
-            if (gridCardsArray[indexOfCard].getCardIcon() === gridCardsArray[indexClicked].getCardIcon()) {
-
-                gridCardsArray[indexOfCard].setMatchedStatus(true);
-                gridCardsArray[indexClicked].setMatchedStatus(true);
-
-                //play some animation here
-
-            } else {
-
-                // set background color for face down pattern
-                $(this).toggleClass('faceup');
-                $(this).find('i').text('');
-
-                let pairID = gridCardsArray[indexClicked].getCardID();
-
-                $('#'+pairID).toggleClass('faceup');
-                $('#' + pairID).find('i').text('');
-
-            }
-
-        }
+        // call function to compare values
+        compareIcons(indexCurrentCard, indexClickedPair)
     
     }
 
 }
 
+
+function compareIcons(iCurrent, iPair) {
+
+    // if there is a non matched and clicked card program will compare icon values
+    if (iPair === -1) {
+
+        // if it is the first card of the pair clicked then set clicked status to true and move on
+        gridCardsArray[iCurrent].setClickedStatus(true);
+
+    } else {
+
+        // if it is the second card of the pair clicked reset the clicked status and move for comparison
+        gridCardsArray[iCurrent].setClickedStatus(false);
+        gridCardsArray[iPair].setClickedStatus(false);
+
+        // compare if icons are the same
+        if (gridCardsArray[iCurrent].getCardIcon() === gridCardsArray[iPair].getCardIcon()) {
+
+            // if icons equal then set matched status to true
+            gridCardsArray[iCurrent].setMatchedStatus(true);
+            gridCardsArray[iPair].setMatchedStatus(true);
+
+            //play some animation here
+
+        } else {
+
+            // get current clicked card id for DOM manuipulation
+            const currentID = gridCardsArray[iCurrent].getCardID();
+
+            // if icons different then set background color for face down pattern and hide icons
+            $('#' + currentID).toggleClass('faceup');  // disable faceup class from clicked element
+            $('#' + currentID).find('i').text('');     // erase text so player cannot access values via dev tools from clicked element
+
+            // get previously clicked card id for DOM manuipulation
+            const pairID = gridCardsArray[iPair].getCardID();
+
+            // set background color for face down pattern and hide icons
+            $('#' + pairID).toggleClass('faceup'); // disable faceup class from previously clicked element
+            $('#' + pairID).find('i').text('');    // erase text so player cannot access values via dev tools from previously clicked element
+
+        }
+
+    }
+
+} 
 
