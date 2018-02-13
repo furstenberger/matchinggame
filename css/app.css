@@ -80,28 +80,85 @@ body {
 }
 
 .wrong {
-    animation-duration: 0.1s;
+
+    -webkit-animation-duration: 0.2s;
+    -moz-animation-duration: 0.2s;
+    -o-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+
+    -webkit-animation-name: moving;
+    -moz-animation-name: moving;
+    -o-animation-name: moving;
     animation-name: moving;
+
+    -webkit-animation-iteration-count: 2;
+    -moz-animation-iteration-count: 2;
+    -o-animation-iteration-count: 2;
     animation-iteration-count: 2;
+
+    -webkit-animation-direction: alternate;
+    -moz-animation-direction: alternate;
+    -o-animation-direction: alternate;
     animation-direction: alternate;
+
+
     position: relative;
     background-color: red;
 }
 
 @keyframes moving {
-    from {
-        left: 0%;
+    0% {
+        transform: rotate(0deg);
+        left: 0;
     }
-    to {
-        left: 15%;
+    50% {
+        transform: rotate(15deg);
+        left: 20%;
+    }
+    100% {
+        transform: rotate(-15deg);
+        left: 0;
     }
 }
 
 /* matched cards gets new background color*/
 .matched {
+
     -webkit-transition: background-color 0.8s ease;
     -moz-transition: background-color 0.8s ease;
     -o-transition: background-color 0.8s ease;
     transition: background-color 0.8s ease;
+
+    -webkit-animation-duration: 0.1s;
+    -moz-animation-duration: 0.1s;
+    -o-animation-duration: 0.1s;
+    animation-duration: 0.1s;
+    
+    -webkit-animation-name: bounce;
+    -moz-animation-name: bounce;
+    -o-animation-name: bounce;
+    animation-name: bounce;
+
+    -webkit-animation-iteration-count: 4;
+    -moz-animation-iteration-count: 4;
+    -o-animation-iteration-count: 4;
+    animation-iteration-count: 4;
+    
+    -webkit-animation-direction: alternate;
+    -moz-animation-direction: alternate;
+    -o-animation-direction: alternate;
+    animation-direction: alternate;
+
+    position: relative;
     background-color: deepskyblue;
 }
+
+@keyframes bounce {
+    from {
+        transform: scale(0.7, 0.7);
+    }
+    to {
+        transform: scale(1.2,1.2);
+    }
+}
+

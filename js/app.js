@@ -56,6 +56,8 @@ function restartGame() {
     // reset DOM to original status
     $('.deck').find('i').remove(); // remove all icons
     $('.card').removeClass('flip faceup matched'); //remove previously added classes
+    $('#moves').text(0);
+    $('#star-score').find('i').text('star');
 
     // start game again
     startGame();
