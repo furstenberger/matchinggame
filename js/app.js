@@ -161,22 +161,31 @@ function compareIcons(iCurrent, iPair) {
         // get previously clicked card id for DOM manuipulation
         const pairID = gridCardsArray[iPair].getCardID();
 
-        $('#' + pairID).toggleClass('moving');
-        $('#' + currentID).toggleClass('moving');       
-
-        // if icons different then set background color for face down pattern and hide icons
-        $('#' + currentID).find('i').text('');     // erase text so player cannot access values via dev tools from clicked element
-        //$('#' + currentID).toggleClass('flip faceup');  // disable faceup class from clicked element
+        // set jQuery elements to variables - avoid multiple querys over DOM
+        let currentCard = $('#' + currentID);
+        let pairCard = $('#' + pairID)
         
-
-        
-
-        // set background color for face down pattern and hide icons
-        $('#' + pairID).find('i').text('');    // erase text so player cannot access values via dev tools from previously clicked element
-        //$('#' + pairID).toggleClass('flip faceup'); // disable faceup class from previously clicked element
-
+        // set red animation for the wrong matched pair
+        animateCard(currentCard);
+        animateCard(pairCard);
 
     }
 
 } 
+
+function animateCard (cardAnimated) {
+
+    // add red effect to cards
+    cardAnimated.addClass('wrong');
+
+    // code to execute after animation ends
+    cardAnimated.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+        function (e) {
+            // if icons different then set background color for face down pattern and hide icons
+            cardAnimated.removeClass('wrong');
+            cardAnimated.find('i').text(''); // erase text so player cannot access values via dev tools from clicked element
+            cardAnimated.toggleClass('flip faceup'); // disable faceup class from clicked element
+        });
+
+}
 

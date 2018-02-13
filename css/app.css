@@ -24,7 +24,6 @@ body {
     -webkit-box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.75);
-
 }
 
 .card {
@@ -54,21 +53,32 @@ body {
     background-color:  mediumturquoise;
 }
 
-/* flip speed goes here */
+/* flip speed */
 .flipper {
+	-webkit-transition: 0.4s;
+	-webkit-transform-style: preserve-3d;
+
+	-moz-transition: 0.4s;
+	-moz-transform-style: preserve-3d;
+  
+    -o-transition: 0.4s;
+	-o-transform-style: preserve-3d;
 
 	transition: 0.4s;
 	transform-style: preserve-3d;
-    position: relative;
-    
+
+	position: relative;
 }
 
-/* flip the pane when hovered */
+/* flip the pane when clicked */
 .flip {
-    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+	transform: rotateY(180deg);
 }
 
-.moving {
+.wrong {
     animation-duration: 0.1s;
     animation-name: moving;
     animation-iteration-count: 2;
