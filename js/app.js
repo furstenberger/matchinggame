@@ -160,22 +160,9 @@ function compareIcons(iCurrent, iPair) {
         const currentID = gridCardsArray[iCurrent].getCardID();
         // get previously clicked card id for DOM manuipulation
         const pairID = gridCardsArray[iPair].getCardID();
-        
-        //$('#' + currentID).animate({ right: "5px" }, 200);
-        //$('#' + currentID).animate({ right: "0px"}, 200);
 
-        const animateTime = 200;
-
-
-        $('#' + currentID).stop(true, true).animate({ left: 30, backgroundColor: 'red' }, animateTime,
-            function () {
-                $('#' + currentID).stop(true, true).animate({ left: 0 }, animateTime);
-            });
-        
-        $('#' + pairID).stop(true, true).animate({ left: 30, backgroundColor: 'red' }, animateTime,
-            function () {
-                $('#' + pairID).stop(true, true).animate({ left: 0 }, animateTime);
-            });
+        $('#' + pairID).toggleClass('moving');
+        $('#' + currentID).toggleClass('moving');       
 
         // if icons different then set background color for face down pattern and hide icons
         $('#' + currentID).find('i').text('');     // erase text so player cannot access values via dev tools from clicked element

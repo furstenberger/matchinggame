@@ -57,7 +57,7 @@ body {
 /* flip speed goes here */
 .flipper {
 
-	transition: 0.6s;
+	transition: 0.4s;
 	transform-style: preserve-3d;
     position: relative;
     
@@ -66,4 +66,22 @@ body {
 /* flip the pane when hovered */
 .flip {
     transform: rotateY(180deg);
+}
+
+.moving {
+    animation-duration: 0.1s;
+    animation-name: moving;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+    position: relative;
+    background-color: red;
+}
+
+@keyframes moving {
+    from {
+        left: 0%;
+    }
+    to {
+        left: 15%;
+    }
 }
