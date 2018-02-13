@@ -29,16 +29,39 @@ let gridCardsArray = [];
 
 $(function () {
 
-    // create the grid array
-    gridCardsArray = createGrid(); 
-
-    // start cards with objects IDs and Icon values
-    initCards();
+    // start game creation
+    startGame();
 
     // add event listener for card click
     $('.card').click(clickCard);
 
+    $('#restart').click(restartGame);
+
 });
+
+// start game function - start card grid and initialize cards
+function startGame(){
+
+    // create the grid array
+    gridCardsArray = createGrid();
+
+    // start cards with objects IDs and Icon values
+    initCards();
+
+}
+
+// restart game without refreshing page
+function restartGame() {
+
+    // reset DOM to original status
+    $('.deck').find('i').remove(); // remove all icons
+    $('.card').removeClass('flip faceup'); //remove previously added classes
+
+    // start game again
+    startGame();
+
+}
+
 
 
 // --------------- card grid creation function --------------
@@ -90,12 +113,6 @@ function initCards() {
 
     });
     
-}
-
-function waveEffect(){
-
-    $(this).toggleClass('waves-effect waves-light');
-
 }
 
 function clickCard() {
@@ -185,6 +202,7 @@ function animateCard (cardAnimated) {
             cardAnimated.removeClass('wrong');
             cardAnimated.find('i').text(''); // erase text so player cannot access values via dev tools from clicked element
             cardAnimated.toggleClass('flip faceup'); // disable faceup class from clicked element
+
         });
 
 }
