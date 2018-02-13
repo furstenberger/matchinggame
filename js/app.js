@@ -149,6 +149,9 @@ function clickCard() {
                 
                 compareIcons(indexCurrentCard, indexClickedPair);
 
+                // add score count
+                score();
+
             }, 1000);
         }
 
@@ -210,6 +213,7 @@ function animateCardWrong (cardAnimated) {
 
 }
 
+// add new background color for matched cards
 function animateCardRight(cardAnimated) {
 
     // add blue effect to cards
@@ -217,3 +221,17 @@ function animateCardRight(cardAnimated) {
 
 }
 
+function score() {
+
+    //update score
+    let movesCounter = $('#moves');
+
+    counter = movesCounter.text();
+
+    console.log(counter);
+
+    counter++;
+
+    movesCounter.text(counter); 
+    
+}
