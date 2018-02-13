@@ -29,6 +29,7 @@ let gridCardsArray = [];
 
 $(document).ready(function () {
 
+
     // start game creation
     startGame();
 
@@ -119,6 +120,9 @@ function initCards() {
 
 function clickCard() {
 
+    //unbind click event to avoid clicks between animations
+    $('.card').unbind('click');
+
     //get card ID from the DOM element
     const cardID = parseInt($(this).attr('id'),10);
 
@@ -149,7 +153,13 @@ function clickCard() {
             // wait 1 sec for player to see card
             setTimeout(function(){
                 
-                compareIcons(indexCurrentCard, indexClickedPair);
+                if (indexCurrentCard !== indexClickedPair) {
+
+                    compareIcons(indexCurrentCard, indexClickedPair);
+
+                } else return;
+
+                
 
                 // add score count
                 score();
@@ -158,6 +168,9 @@ function clickCard() {
         }
 
     }
+
+    //rebind click after routine completion
+    $('.card').click(clickCard);
 
 }
 
