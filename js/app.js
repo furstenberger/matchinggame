@@ -228,10 +228,48 @@ function score() {
 
     counter = movesCounter.text();
 
-    console.log(counter);
-
     counter++;
 
     movesCounter.text(counter); 
+
+    starScore(counter);
     
+}
+
+function starScore(currentScore) {
+
+    // 3    stars for 13 or less movements
+    // 2.5  stars for 14 to 16 movements
+    // 2    stars for 17 to 19 movements
+    // 1.5  stars for 20 to 22 movements
+    // 1    star  for 23 to 25 movements
+    // 0.5  star  for 26 to 28 movements
+    // 0    star  for 29 or more movements
+
+    if (currentScore >= 14 && currentScore <= 16) {
+        console.log('entrou');
+        $('#star3').find('i').text('star_half');
+        return;
+    }
+    if (currentScore >= 17 && currentScore <= 19) {
+        $('#star3').find('i').text('star_border');
+        return;
+    }
+    if (currentScore >= 20 && currentScore <= 22){
+        $('#star2').find('i').text('star_half');
+        return;
+    }
+    if (currentScore >= 23 && currentScore <= 25) {
+        $('#star2').find('i').text('star_border');
+        return;
+    }
+    if (currentScore >= 26 && currentScore <= 28) {
+        $('#star1').find('i').text('star_half');
+        return;
+    } 
+    if (currentScore >= 29) {
+        $('#star1').find('i').text('star_border');
+        return;
+    }
+
 }
