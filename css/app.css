@@ -124,30 +124,30 @@ body {
 /* matched cards gets new background color*/
 .matched {
 
-    -webkit-transition: background-color 0.8s ease;
+     -webkit-transition: background-color 0.8s ease;
     -moz-transition: background-color 0.8s ease;
     -o-transition: background-color 0.8s ease;
     transition: background-color 0.8s ease;
 
-    -webkit-animation-duration: 0.1s;
-    -moz-animation-duration: 0.1s;
-    -o-animation-duration: 0.1s;
-    animation-duration: 0.1s;
+    -webkit-animation-duration: 0.2s;
+    -moz-animation-duration: 0.2s;
+    -o-animation-duration: 0.2s;
+    animation-duration: 0.2s;
     
     -webkit-animation-name: bounce;
     -moz-animation-name: bounce;
     -o-animation-name: bounce;
     animation-name: bounce;
 
-    -webkit-animation-iteration-count: 4;
-    -moz-animation-iteration-count: 4;
-    -o-animation-iteration-count: 4;
-    animation-iteration-count: 4;
+    -webkit-animation-iteration-count: 3;
+    -moz-animation-iteration-count: 3;
+    -o-animation-iteration-count: 3;
+    animation-iteration-count: 3;
     
     -webkit-animation-direction: alternate;
     -moz-animation-direction: alternate;
     -o-animation-direction: alternate;
-    animation-direction: alternate;
+    animation-direction: alternate; 
 
     position: relative;
     background-color: deepskyblue;

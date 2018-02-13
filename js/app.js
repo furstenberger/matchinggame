@@ -27,7 +27,7 @@ const gridSize = 16;
 let gridCardsArray = [];
 
 
-$(function () {
+$(document).ready(function () {
 
     // start game creation
     startGame();
@@ -132,7 +132,7 @@ function clickCard() {
         const iconText = gridCardsArray[indexCurrentCard].getCardIcon();
 
         // set background color and flip the card
-        $(this).toggleClass('flip faceup').find('i').text(iconText);
+        $(this).addClass('flip faceup').find('i').text(iconText);
 
         // search in the cards object array for another clicked card
         const indexClickedPair = gridCardsArray.findIndex(i => i.cardClicked() === true);
@@ -206,10 +206,14 @@ function animateCardWrong (cardAnimated) {
     // code to execute after animation ends
     cardAnimated.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
         function (e) {
-            // if icons different then set background color for face down pattern and hide icons
-            cardAnimated.removeClass('wrong');
+            
+            // unbind event to prevent other animation ends to come over this function
+            cardAnimated.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
+
             cardAnimated.find('i').text(''); // erase text so player cannot access values via dev tools from clicked element
-            cardAnimated.toggleClass('flip faceup'); // disable faceup class from clicked element
+            // if icons different then set background color for face down pattern and hide icons
+            cardAnimated.removeClass('wrong faceup flip');
+            //cardAnimated.removeClass('faceup'); // disable faceup class from clicked element
 
         });
 
@@ -219,7 +223,7 @@ function animateCardWrong (cardAnimated) {
 function animateCardRight(cardAnimated) {
 
     // add blue effect to cards
-    cardAnimated.addClass('matched');
+    cardAnimated.toggleClass('matched');
 
 }
 
