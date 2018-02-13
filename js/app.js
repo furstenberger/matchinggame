@@ -55,7 +55,7 @@ function restartGame() {
 
     // reset DOM to original status
     $('.deck').find('i').remove(); // remove all icons
-    $('.card').removeClass('flip faceup'); //remove previously added classes
+    $('.card').removeClass('flip faceup matched'); //remove previously added classes
 
     // start game again
     startGame();
@@ -162,6 +162,15 @@ function compareIcons(iCurrent, iPair) {
     gridCardsArray[iCurrent].setClickedStatus(false);
     gridCardsArray[iPair].setClickedStatus(false);
 
+    // get current clicked card id for DOM manuipulation
+    const currentID = gridCardsArray[iCurrent].getCardID();
+    // get previously clicked card id for DOM manuipulation
+    const pairID = gridCardsArray[iPair].getCardID();
+
+    // set jQuery elements to variables - avoid multiple querys over DOM
+    let currentCard = $('#' + currentID);
+    let pairCard = $('#' + pairID);
+
     // compare if icons are the same
     if (gridCardsArray[iCurrent].getCardIcon() === gridCardsArray[iPair].getCardIcon()) {
 
@@ -169,28 +178,22 @@ function compareIcons(iCurrent, iPair) {
         gridCardsArray[iCurrent].setMatchedStatus(true);
         gridCardsArray[iPair].setMatchedStatus(true);
 
-        //play some animation here
+        // add right background
+        animateCardRight(currentCard);
+        animateCardRight(pairCard);
 
     } else {
        
-        // get current clicked card id for DOM manuipulation
-        const currentID = gridCardsArray[iCurrent].getCardID();
-        // get previously clicked card id for DOM manuipulation
-        const pairID = gridCardsArray[iPair].getCardID();
-
-        // set jQuery elements to variables - avoid multiple querys over DOM
-        let currentCard = $('#' + currentID);
-        let pairCard = $('#' + pairID)
         
         // set red animation for the wrong matched pair
-        animateCard(currentCard);
-        animateCard(pairCard);
+        animateCardWrong(currentCard);
+        animateCardWrong(pairCard);
 
     }
 
 } 
 
-function animateCard (cardAnimated) {
+function animateCardWrong (cardAnimated) {
 
     // add red effect to cards
     cardAnimated.addClass('wrong');
@@ -204,6 +207,13 @@ function animateCard (cardAnimated) {
             cardAnimated.toggleClass('flip faceup'); // disable faceup class from clicked element
 
         });
+
+}
+
+function animateCardRight(cardAnimated) {
+
+    // add blue effect to cards
+    cardAnimated.addClass('matched');
 
 }
 
