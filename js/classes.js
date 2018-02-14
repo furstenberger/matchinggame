@@ -1,23 +1,30 @@
-/* ----------------- Matching Game App Classes ----------------- 
+/* ----------------- Matching Game Class Collection ----------------- 
     Matching Game *** Alexandre Furstenberger  
 
    * Created by Alexandre Furstenberger
    * Date: February 2018
-   * Project: developed as a project for Udacity's Front End Web Developer Nanodegree 
+   * Project: developed as a project for Udacity's Front End Web Developer Nanodegree
+   * Using jQuery v3.3.1
 
 */
 
 /* Sections
-   ========================================================================== */
+   ======================================================================================== */
+
+/**
+* @description Represents a grid card
+* @constructor
+* @param {string} icon - The card image to be shown when faced up
+* @param {string} id - Card identification
+*/
 
 
-//  Define superclass for grid cards
 let gridCard = function (icon, id){
 
     this.cardIcon = icon;               // assign which icon object will show once faced up
     this.cardID = id;                   // identify object 
     this.cardColor = 'darkslategray';   // define default card color faced down
-    this.isClicked = false;              // define card status if clicked
+    this.isClicked = false;             // define card status if clicked
     this.isMatched = false;             // define card status if matched
 
 }

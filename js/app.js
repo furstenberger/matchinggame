@@ -4,7 +4,8 @@
    * Created by Alexandre Furstenberger
    * Date: February 2018
    * Project: developed as a project for Udacity's Front End Web Developer Nanodegree
-   * Using jQuery v3.3.1
+   * jQuery v3.3.1
+   * Bootstrap v4.0
 
 */
 
