@@ -19,6 +19,7 @@ body {
     font-family: 'Titillium Web', sans-serif;
 }
 
+/* Box Shadow */
 .deck {
     background: linear-gradient(to bottom right, rgb(43, 235, 193), plum );
     -webkit-box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.75);
@@ -27,29 +28,35 @@ body {
     box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.75);
 }
 
+/* card size */
 .card {
     height: 6em;
     width: 6em;
     background-color: darkslategray;
 }
 
+/* mag grid size */
 .container {
     max-width: 600px;
 }
 
+/* add margins between lines of the grid */
 .row-margin {
     padding-top: 1em;
     padding-bottom: 1em;
 }
 
+/* align icons at the center of the div */
 .panel-heading { 
     vertical-align: middle !important; 
 }
 
+/* mouse pointer on card hover */
 .m-pointer {
     cursor: pointer;
 }
 
+/* card background when face up */
 .faceup {
     background-color:  mediumturquoise;
 }
@@ -178,4 +185,14 @@ body {
 
 .modal-backdrop.show {
     opacity: 1;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#win-icon {
+    color: lightgreen;
 }

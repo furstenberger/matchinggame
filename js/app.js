@@ -26,6 +26,8 @@ const gridSize = 16;
 // array for cards storage
 let gridCardsArray = [];
 
+let cardFaceUpCount = 0;
+
 
 $(document).ready(function () {
 
@@ -153,17 +155,23 @@ function clickCard() {
             // wait 1 sec for player to see card
             setTimeout(function(){
                 
-                // test if the card clicked is the same. If yes, return the function
+                // test if the card clicked is repeated. 
                 if (indexCurrentCard !== indexClickedPair) {
 
                     compareIcons(indexCurrentCard, indexClickedPair);
 
-                } else return;
-
-                
+                } //If yes, return the function 
+                else return;
 
                 // add score count
                 score();
+
+                // if all cards face up call end game message
+                if (cardFaceUpCount === gridCardsArray.length) { 
+
+                    endGame();
+
+                }
 
             }, 1000);
         }
@@ -200,6 +208,8 @@ function compareIcons(iCurrent, iPair) {
         // add right background
         animateCardRight(currentCard);
         animateCardRight(pairCard);
+
+        cardFaceUpCount = cardFaceUpCount + 2;
 
     } else {
        
@@ -267,7 +277,6 @@ function starScore(currentScore) {
     // 0    star  for 29 or more movements
 
     if (currentScore >= 14 && currentScore <= 16) {
-        console.log('entrou');
         $('#star3').find('i').text('star_half');
         return;
     }
@@ -291,5 +300,27 @@ function starScore(currentScore) {
         $('#star1').find('i').text('star_border');
         return;
     }
+
+}
+
+// count stars and and get score to show on modal
+function endGame() {
+
+    let moveCount = $("#moves").text();
+
+    const starScore = $("#star-score").find('i');
+    let halfStar = 0;
+    let fullStar = 0;
+    
+
+    starScore.each(function (index) {
+        if ($(this).text() === 'star_half') { halfStar = 0.5; }
+        if ($(this).text() === 'star') { fullStar++; }
+    });
+
+    let totalStars = halfStar + fullStar
+
+    $("#win-msg").append("<p>With " + moveCount + " moves and " + totalStars + " stars</p><p>Woooooo!</p>");
+    $('#winModal').modal('show');
 
 }

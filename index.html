@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Spartan Memory Game</title>
+        <title>Memory Game</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -100,11 +100,16 @@
             </div>
         </section>
         <!-- Modal -->
-        <div class="modal fade container" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade container" id="winModal" tabindex="-1" role="dialog" aria-labelledby="winModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        ...
+                        <ul class="list-unstyled text-center">
+                            <li><i id="win-icon" class="large material-icons">check_circle</i></li>
+                            <li><h2>Congratulations! You won!</h2></li>
+                            <li id="win-msg"></li>
+                            <li><button type="button" class="btn btn-secondary" data-dismiss="modal">Play Again!</button></li>
+                        </ul>
                     </div>
                 </div>
             </div>
