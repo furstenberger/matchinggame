@@ -153,6 +153,7 @@ function clickCard() {
             // wait 1 sec for player to see card
             setTimeout(function(){
                 
+                // test if the card clicked is the same. If yes, return the function
                 if (indexCurrentCard !== indexClickedPair) {
 
                     compareIcons(indexCurrentCard, indexClickedPair);
