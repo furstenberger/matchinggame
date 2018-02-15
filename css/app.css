@@ -196,3 +196,17 @@ body {
 #win-icon {
     color: lightgreen;
 }
+
+@media (max-width: 560px) { 
+    .card {
+        height: 5em;
+        width: 5em;
+    }
+ }
+
+ @media (max-width: 450px) { 
+    .card {
+        height: 4em;
+        width: 4em;
+    }
+ }

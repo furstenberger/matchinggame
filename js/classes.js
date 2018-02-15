@@ -5,7 +5,7 @@
    * Date: February 2018
    * Project: developed as a project for Udacity's Front End Web Developer Nanodegree
 
-*  ------------------------------------------------------------------/
+*/
 
 /**
 * @description Represents a grid card

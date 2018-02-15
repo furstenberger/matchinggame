@@ -27,8 +27,12 @@ const gridSize = 16;
 // array for cards storage
 let gridCardsArray = [];
 
+// cards faced up counter
 let cardFaceUpCount = 0;
 
+// timer for the game
+let myTimer = null;
+let timerStart = null;
 
 $(document).ready(function () {
 
@@ -40,6 +44,8 @@ $(document).ready(function () {
     $('.card').click(clickCard);
 
     $('#restart').click(restartGame);
+
+    $('.btn-secondary').click(restartGame);
 
 });
 
@@ -57,11 +63,16 @@ function startGame(){
 // restart game without refreshing page
 function restartGame() {
 
+
     // reset DOM to original status
+    clearInterval(myTimer); // stop time counter
+    myTimer = null;
+    $('#timer').text('0 Seconds'); // reset counter text
     $('.deck').find('i').remove(); // remove all icons
     $('.card').removeClass('flip faceup matched'); //remove previously added classes
-    $('#moves').text(0);
-    $('#star-score').find('i').text('star');
+    $('#moves').text(0); // reset move counter
+    $('#star-score').find('i').text('star'); // reset stars value
+    
 
     // start game again
     startGame();
@@ -123,6 +134,19 @@ function initCards() {
 
 function clickCard() {
 
+    
+    //start game timer
+    
+    if (myTimer == null) {
+    
+        timerStart = new Date;
+
+        myTimer = setInterval(function () {
+            $('#timer').text(Math.round((new Date - timerStart) / 1000, 0) + " Seconds");
+        }, 1000);
+
+    }
+
     //unbind click event to avoid clicks between animations
     $('.card').unbind('click');
 
@@ -171,6 +195,8 @@ function clickCard() {
                 if (cardFaceUpCount === gridCardsArray.length) { 
 
                     endGame();
+
+                    clearInterval(timeCounter);
 
                 }
 
@@ -309,11 +335,18 @@ function endGame() {
 
     let moveCount = $("#moves").text();
 
+    clearInterval(myTimer);
+    myTimer = null;
+
+    let timeCount = $('#timer').text();
+
+    console.log(timeCount)
+
     const starScore = $("#star-score").find('i');
     let halfStar = 0;
     let fullStar = 0;
     
-
+    // count stars
     starScore.each(function (index) {
         if ($(this).text() === 'star_half') { halfStar = 0.5; }
         if ($(this).text() === 'star') { fullStar++; }
@@ -321,7 +354,7 @@ function endGame() {
 
     let totalStars = halfStar + fullStar
 
-    $("#win-msg").append("<p>With " + moveCount + " moves and " + totalStars + " stars</p><p>Woooooo!</p>");
+    $("#win-msg").append("<p>With " + moveCount + " moves, " + totalStars + " stars in " + timeCount +"</p><p>Woooooo!</p>");
     $('#winModal').modal('show');
 
 }
