@@ -67,6 +67,7 @@ function restartGame() {
     // reset DOM to original status
     clearInterval(myTimer); // stop time counter
     myTimer = null;
+    cardFaceUpCount = 0;
     $('#timer').text('0 Seconds'); // reset counter text
     $('.deck').find('i').remove(); // remove all icons
     $('.card').removeClass('flip faceup matched'); //remove previously added classes
@@ -345,6 +346,7 @@ function endGame() {
     const starScore = $("#star-score").find('i');
     let halfStar = 0;
     let fullStar = 0;
+    cardFaceUpCount = 0;
     
     // count stars
     starScore.each(function (index) {
@@ -354,7 +356,7 @@ function endGame() {
 
     let totalStars = halfStar + fullStar
 
-    $("#win-msg").append("<p>With " + moveCount + " moves, " + totalStars + " stars in " + timeCount +"</p><p>Woooooo!</p>");
+    $("#win-msg").replaceWith("<p>With " + moveCount + " moves, " + totalStars + " stars in " + timeCount +"</p><p>Woooooo!</p>");
     $('#winModal').modal('show');
 
 }
